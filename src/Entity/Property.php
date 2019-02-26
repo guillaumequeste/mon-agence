@@ -87,6 +87,7 @@ class Property
     private $updated_at;
 
     /**
+     * @var string|null
      * @ORM\Column(type="string", length=255)
      */
     private $filename;
