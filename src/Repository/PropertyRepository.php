@@ -30,10 +30,21 @@ class PropertyRepository extends ServiceEntityRepository
                     ->getQuery()
                     ->getResult();
     }
+
     private function findVisibleQuery(): QueryBuilder
     {
         return $this->createQueryBuilder('p')
                     ->where('p.sold = false');
+    }
+
+    /**
+     * @return Property[]
+     */
+    public function findAllVisible(): array
+    {
+        return $this->findVisibleQuery()
+                    ->getQuery()
+                    ->getResult();
     }
 
     // /**

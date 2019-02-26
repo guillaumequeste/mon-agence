@@ -20,4 +20,17 @@ class HomeController extends AbstractController
             'properties' => $properties
         ]);
     }
+
+    /**
+     * @Route("/biens", name="property_index")
+     * @return Response
+     */
+    public function index_acheter(PropertyRepository $repository): Response
+    {
+        $properties = $repository->findAllVisible();
+        return $this->render('property/index.html.twig', [
+            'current_menu' => 'properties',
+            'properties' => $properties
+        ]);
+    }
 }
