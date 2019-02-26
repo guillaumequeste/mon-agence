@@ -91,6 +91,12 @@ class Property
      */
     private $filename;
 
+    public function __construct()
+    {
+        $this->created_at = new \DateTime();
+        $this->updated_at = new \DateTime();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -178,6 +184,11 @@ class Property
         $this->price = $price;
 
         return $this;
+    }
+
+    public function getFormattedPrice(): string
+    {
+        return number_format($this->price, 0, '', '');
     }
 
     public function getHeat(): ?int
