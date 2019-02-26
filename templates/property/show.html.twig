@@ -12,6 +12,13 @@
             </div>
         {% endfor %}
     {% endfor %}
+            <div class="row">
+                <div class="col-md-8">
+                    {% if property.filename %}
+                        <img src="/images/properties/{{ property.filename }}" alt="card-img-top" style="width:100%; height:auto">
+                        {% else %}
+                            <img src="/images/properties/maison.jpg" alt="card-img-top" style="width:100%; height:auto">
+                    {% endif %}
                 </div>
                 <div class="col-md-4">
                     <h1>{{ property.title }}</h1>
@@ -19,6 +26,7 @@
                     <div class="text-primary" style="font-size: 4rem;font-weight: bold;">{{ property.formattedPrice }} €</div>
                     <a href="#" class="btn btn-primary">Contacter l'agence</a>
                 </div>
+            </div>
             </div>
         </div>
     </div>

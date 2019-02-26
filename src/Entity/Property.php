@@ -4,9 +4,14 @@ namespace App\Entity;
 
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PropertyRepository")
+ * @Vich\Uploadable
  */
 class Property
 {
@@ -92,6 +97,13 @@ class Property
      * @ORM\Column(type="string", length=255)
      */
     private $filename;
+
+    /**
+     * @var File|null
+     * @Assert\File(mimeTypes={"image/jpeg", "image/jpg"})
+     * @Vich\UploadableField(mapping="property_image", fileNameProperty="filename")
+     */
+    private $imageFile;
 
     public function __construct()
     {
@@ -282,14 +294,53 @@ class Property
         return $this;
     }
 
-    public function getFilename(): ?string
+    /**
+     * Get the value of filename
+     *
+     * @return  string|null
+     */ 
+    public function getFilename()
     {
         return $this->filename;
     }
 
-    public function setFilename(string $filename): self
+    /**
+     * Set the value of filename
+     *
+     * @param  string|null  $filename
+     *
+     * @return  self
+     */ 
+    public function setFilename($filename)
     {
         $this->filename = $filename;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of imageFile
+     *
+     * @return  File|null
+     */ 
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * Set the value of imageFile
+     *
+     * @param  File|null  $imageFile
+     *
+     * @return  self
+     */ 
+    public function setImageFile($imageFile)
+    {
+        $this->imageFile = $imageFile;
+        if ($this->imageFile instanceof UploadedFile) {
+            $this->updated_at = new \DateTime('now');
+        }
 
         return $this;
     }
