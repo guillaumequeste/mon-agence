@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -96,6 +97,11 @@ class Property
     {
         $this->created_at = new \DateTime();
         $this->updated_at = new \DateTime();
+    }
+
+    public function getSlug(): string
+    {
+        return $slugify = (new Slugify())->slugify($this->title);
     }
 
     public function getId(): ?int

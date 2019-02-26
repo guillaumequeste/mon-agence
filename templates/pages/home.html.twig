@@ -5,7 +5,7 @@
 {% block body %}
 <div class="jumbotron text-center">
     <h1>Agence</h1>
-    <p>Ceci est ma nouvelle agence</p>
+    <p>lorem ipsum ksdjnfvlsdjfv skljkdsf ljsd lkrlrlk gljljrgbljr</p>
 </div>
 
 <div class="container">
@@ -21,7 +21,7 @@
                     {% endif %}
                     <div class="card-body">
                         <h5 class="card-title">
-                            <a href="#">{{ property.title }}</a>
+                            <a href="{{ path('property_show', {slug: property.slug, id: property.id}) }}">{{ property.title }}</a>
                         </h5>
                         <p class="card-text">{{ property.city }} ({{ property.postalCode }})</p>
                         <div class="text-primary" style="font-weight: bold;font-size: 2rem">{{ property.formattedPrice }} €</div>
