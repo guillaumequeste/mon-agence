@@ -25,6 +25,7 @@ class HomeController extends AbstractController
             'properties' => $properties
         ]);
     }
+
     /**
      * @Route("/biens", name="property_index")
      * @return Response
