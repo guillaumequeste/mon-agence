@@ -38,7 +38,7 @@ class HomeController extends AbstractController
         $properties = $paginator->paginate(
             $this->repository->findAllVisibleQuery($search),
             $request->query->getInt('page', 1),
-            2
+            5
         );
         return $this->render('property/index.html.twig', [
             'current_menu' => 'properties',
