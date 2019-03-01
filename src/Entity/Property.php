@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Cocur\Slugify\Slugify;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -15,6 +17,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Property
 {
+    const HEAT = [
+        0 => 'Electrique',
+        1 => 'Gaz'
+    ];
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -110,6 +117,7 @@ class Property
     {
         $this->created_at = new \DateTime();
         $this->updated_at = new \DateTime();
+        $this->options = new ArrayCollection();
     }
 
     public function getSlug(): string
@@ -221,6 +229,11 @@ class Property
         $this->heat = $heat;
 
         return $this;
+    }
+
+    public function getHeatType(): string
+    {
+        return self::HEAT[$this->heat];
     }
 
     public function getCity(): ?string

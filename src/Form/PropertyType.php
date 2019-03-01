@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class PropertyType extends AbstractType
 {
@@ -28,6 +29,9 @@ class PropertyType extends AbstractType
             ->add('imageFile', FileType::class, [
                 'required' => false
             ])
+            ->add('heat', ChoiceType::class, [
+                'choices' => $this->getChoices()
+            ])
         ;
     }
 
@@ -37,5 +41,15 @@ class PropertyType extends AbstractType
             'data_class' => Property::class,
             'translation_domain' => 'forms'
         ]);
+    }
+
+    private function getChoices()
+    {
+        $choices = Property::HEAT;
+        $output = [];
+        foreach($choices as $k => $v) {
+            $output[$v] = $k;
+        }
+        return $output;
     }
 }
